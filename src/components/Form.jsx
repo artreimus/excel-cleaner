@@ -141,6 +141,7 @@ const Form = () => {
     let today = new Date();
     Opened = new Date(Opened);
     Updated = new Date(Updated);
+    //Resolved = new Date(Resolved);
 
     const actualElapsedInDays = Math.floor(
       (today.getTime() - Opened.getTime()) / (24 * 3600 * 1000)
@@ -149,6 +150,14 @@ const Form = () => {
     const untouchedElapsedInDays = Math.floor(
       (today.getTime() - Updated.getTime()) / (24 * 3600 * 1000)
     );
+
+    /*const resolvedTime = (
+      (Opened.getTime() - Resolved.getTime()) / 1000
+    );
+
+    const tTR = (
+      resolvedTime / 24 
+    );*/
 
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
@@ -187,6 +196,9 @@ const Form = () => {
       Channel,
       Categorization,
       Updated,
+      //'Resolve': Resolved,
+      //'Resolve Time': resolvedTime,
+      //tTR,
       Remarks,
       'Untouched elapsed': untouchedElapsedInDays,
     };
