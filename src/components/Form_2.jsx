@@ -66,13 +66,27 @@ const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     let today = new Date();
     Opened = new Date(Opened);
     Updated = new Date(Updated);
-    
+    Resolved = new Date(Resolved);
+
+    d = Math.floor(resolvedTime / (3600*24))
+    h = Math.floor(resolvedTime % (3600*24) / 3600)
+    m = Math.floor(resolvedTime % 3600 / 60)
+    s = Math.floor(resolvedTime % 60)    
+
     const actualElapsedInDays = Math.floor(
       (today.getTime() - Opened.getTime()) / (24 * 3600 * 1000)
     );
 
     const untouchedElapsedInDays = Math.floor(
       (today.getTime() - Updated.getTime()) / (24 * 3600 * 1000)
+    );
+
+    const resolvedTime = (
+      (Opened.getTime() - Resolved.getTime()) / 1000
+    );
+
+    const tTR = (
+      d + ":" + h + ":" + m + ":" + s 
     );
 
     today = today.toLocaleDateString('en-US');
@@ -109,6 +123,9 @@ const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Channel,
       Categorization,
       Updated,
+      'Resolve': Resolved,
+      'Resolve Time': resolvedTime,
+      tTR,
       Remarks,
       'Untouched elapsed': untouchedElapsedInDays,
     };
