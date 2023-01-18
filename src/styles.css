@@ -131,8 +131,17 @@ table {
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
 .hidden {
   display: none;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 div {
@@ -183,4 +192,107 @@ form {
   font-family: 'Inter', sans-serif;
   color: #fff;
   background-color: #000000;
+}
+
+.control {
+  border: 1px solid black;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.control__header {
+  border-bottom: 1px solid black;
+  position: relative;
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.control__container--inputs {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 10px;
+}
+
+.homepage {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage__container {
+  border: 1px solid black;
+  width: 40%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.homepage__btn {
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.homepage__container + .homepage__container {
+  margin-left: 2rem;
+}
+
+.control__btn {
+  background-color: black;
+  color: #fff;
+  padding: 0.5em 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: absolute;
+  right: 10px;
+  top: 25%;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.input-grp {
+  border: 1px solid black;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-grp > label {
+  margin-bottom: 0.2rem;
+}
+
+.input-grp > input {
+  padding-left: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.input-grp > select {
+  padding-left: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.input-grp > button {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  padding: 0.2em 0.4em;
+}
+
+.input-grp--io {
+  background-color: rgb(253, 255, 158);
+}
+
+.input-grp--ao {
+  background-color: rgb(167, 210, 255);
 }
