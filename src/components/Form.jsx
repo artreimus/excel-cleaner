@@ -1,84 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { utils, writeFileXLSX, read } from 'xlsx';
+import Headers from '../Config/Headers';
 
-const testIOAssignmentGroupOptions = {
-  'Service Desk': 'Service Desk',
-  'Service Mgmt': 'Service Mgmt',
-  'Data Center-Windows': 'Cloud',
-  'Data Center-Backups': 'Cloud',
-  'Cloud-Administrators': 'Cloud',
-  L3_BUMA_Workplace: 'L3 BUMA',
-  L3_BUMA_Network: 'L3 BUMA',
-  'Networks-Operations': 'Networks',
-  'Workplace-Desktop': 'Workplace',
-  'Workplace-Collaboration': 'Workplace',
-  'Workplace-Messaging': 'Workplace',
-};
-
-const testAOAssignmentGroupOptions = {
-  'SAP ERP - Supply Chain (MM/PO)': 'SAP SC',
-  'SAP ERP - Basis': 'SAP Basis',
-  'SAP ERP - Security': 'SAP Security',
-  'SAP ERP - Asset Management': 'SAP AM',
-  'SAP ERP - Finance (FI/CO)': 'SAP Finance',
-  'L3_BUMA_Non-ERP_Applications': 'L3 Non ERP',
-  'SAP ERP -  Concur': 'SAP Concur',
-  'Enhancement/ABAP': 'Enhancement',
-  'BUMA Safety': 'BUMA Safety',
-  Integration: 'Integration',
-  'Employee Central': 'Employee Central',
-};
-
-const testHeaders = [
-  'Number',
-  'Opened',
-  'Date',
-  'Actual elapsed',
-  'Elapsed',
-  'Priority',
-  'State',
-  'Short description',
-  'Group',
-  'Tower',
-  'Channel',
-  'Task type',
-  'Categorization',
-  'Updated',
-  'Week',
-  'Untouched elapsed',
-  'Assigned to',
-  'Remarks',
-];
-
-const testIOAssignmentGroups = [
-  'Data Center-Windows',
-  'Workplace-Desktop',
-  'Workplace-Collaboration',
-  'Workplace-Messaging',
-  'L3_BUMA_Workplace',
-  'L3_BUMA_Network',
-  'Networks-Operations',
-  'Cloud-Administrators',
-  'Service Desk',
-  'Service Mgmt',
-  'Service Mgmt-Configuration',
-];
-
-const testAOAssignmentGroups = [
-  'SAP ERP - Supply Chain (MM/PO)',
-  'SAP ERP - Basis',
-  'SAP ERP - Security',
-  'SAP ERP - Asset Management',
-  'SAP ERP - Finance (FI/CO)',
-  'SAP ERP -  Concur',
-  'L3_BUMA_Non-ERP_Applications',
-  'Enhancement/ABAP',
-  'BUMA Safety',
-  'Integration',
-  'Employee Central',
-];
-
-const Form = () => {
+const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
   const [file, setFile] = useState();
   const [data, setData] = useState([]);
   const [IOData, setIOData] = useState([]);
@@ -98,23 +22,24 @@ const Form = () => {
   }, [file]);
 
   useEffect(() => {
-    filterData(testIOAssignmentGroups, testAOAssignmentGroups);
-  }, [data]);
+    filterData(Object.keys(ioAssignmentGrps), Object.keys(aoAssignmentGrps));
+  }, [data, ioAssignmentGrps, aoAssignmentGrps]);
 
-  function renameAssignmentGroup(group, options) {
-    return options[group] ?? group;
+  function renameAssignmentGroup(group) {
+    const newName = ioAssignmentGrps[group] ?? aoAssignmentGrps[group] ?? group;
+    return newName;
   }
 
-  function filterData(IOAssignmentGroups, AOAssignmentGroups) {
+  function filterData(ioGrp, aoGrp) {
     const arrIO = [];
     const arrAO = [];
     const arrNoGrp = [];
 
     data.forEach((ticket) => {
       const assignmentGrp = ticket['Assignment group'];
-      if (IOAssignmentGroups.includes(assignmentGrp)) {
+      if (ioGrp.includes(assignmentGrp)) {
         arrIO.push(formatRowData(ticket));
-      } else if (AOAssignmentGroups.includes(assignmentGrp)) {
+      } else if (aoGrp.includes(assignmentGrp)) {
         arrAO.push(formatRowData(ticket));
       } else {
         arrNoGrp.push(ticket);
@@ -175,10 +100,7 @@ const Form = () => {
       Elapsed = '> 1 month';
     }
 
-    const assignmentGroup = renameAssignmentGroup(
-      obj['Assignment group'],
-      testIOAssignmentGroupOptions
-    );
+    const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
     return {
       'Short description': obj['Short description'],
@@ -208,10 +130,10 @@ const Form = () => {
     const workBook = utils.book_new();
     const rawSheet = utils.json_to_sheet(data);
     const ioSheet = utils.json_to_sheet(IOData, {
-      header: [...testHeaders],
+      header: [...Headers],
     });
     const aoSheet = utils.json_to_sheet(AOData, {
-      header: [...testHeaders],
+      header: [...Headers],
     });
     const noGrpSheet = utils.json_to_sheet(noGrpData);
     utils.book_append_sheet(workBook, rawSheet, 'PinakaRaw');

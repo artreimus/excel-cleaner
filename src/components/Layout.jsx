@@ -1,12 +1,15 @@
 import React from 'react';
+import { Outlet, Link } from 'react-router-dom';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <>
-      <header className="header">
-        <h1>Excel Cleaner</h1>
-      </header>
-      <body className="main">{children}</body>;
+      <Link to="/">
+        <header className="header">Excel Cleaner</header>
+      </Link>
+      <main className="main">
+        <Outlet />
+      </main>
     </>
   );
 };
