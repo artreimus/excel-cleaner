@@ -75,34 +75,35 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     m = Math.floor(resolvedTime % 3600 / 60)
     s = Math.floor(resolvedTime % 60)    
 
-    const actualElapsedInDays = Math.floor(
+    /*const actualElapsedInDays = Math.floor(
       (today.getTime() - Opened.getTime()) / (24 * 3600 * 1000)
     );
 
     const untouchedElapsedInDays = Math.floor(
       (today.getTime() - Updated.getTime()) / (24 * 3600 * 1000)
-    );
+    );*/
 
     const resolvedTime = (
       (Opened.getTime() - Resolved.getTime()) / 1000
     );
 
-    const tTR = (
+    const TTR = (
       d + ":" + h + ":" + m + ":" + s 
     );
 
     const openedWeekdate = (
-      Opened.getDate() - Opened.getDay() + (Opened.getDay() == 0 ? -6:1)
+      Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1))
     );
     
     const resolvedWeekdate = (
-      Resolved.getDate() - Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1)
+      Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
     );
 
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
     Updated = Updated.toLocaleDateString('en-US');
-
+    /*openedWeekdate = openedWeekdate.toLocaleDateString('en-US');
+    resolvedWeekdate = resolvedWeekdate.toLocaleDateString('en-US');*/
     let Elapsed = '';
 
     if (actualElapsedInDays < 7) {
@@ -135,7 +136,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Resolved,
       resolvedWeekdate,
       resolvedTime,
-      tTR,
+      TTR,
       Remarks,
       //'Untouched elapsed': untouchedElapsedInDays,
     };
