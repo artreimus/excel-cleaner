@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { utils, writeFileXLSX, read } from 'xlsx';
-import Headers from '../Config/Headers';
+import HeadersTwo from '../Config/HeadersTwo';
 
-const Form_2 = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
+const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
   const [file, setFile] = useState();
   const [data, setData] = useState([]);
   const [IOData, setIOData] = useState([]);
@@ -145,10 +145,10 @@ const Form_2 = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     const workBook = utils.book_new();
     const rawSheet = utils.json_to_sheet(data);
     const ioSheet = utils.json_to_sheet(IOData, {
-      header: [...Headers],
+      header: [...HeadersTwo],
     });
     const aoSheet = utils.json_to_sheet(AOData, {
-      header: [...Headers],
+      header: [...HeadersTwo],
     });
     const noGrpSheet = utils.json_to_sheet(noGrpData);
     utils.book_append_sheet(workBook, rawSheet, 'PinakaRaw');
@@ -193,4 +193,4 @@ const Form_2 = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
   );
 };
 
-export default Form_2;
+export default FormTwo;

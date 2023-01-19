@@ -1,4 +1,4 @@
-const Headers_2 = [
+const HeadersTwo = [
   'Number',
   'Opened',
   'Week Opened ',
@@ -17,4 +17,4 @@ const Headers_2 = [
   'TTR',
 ];
 
-export default Headers_2;
+export default HeadersTwo;

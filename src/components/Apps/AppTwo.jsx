@@ -4,7 +4,7 @@ const AppTwo = () => {
   const { ioAssignmentGrps, aoAssignmentGrps } = useProvideContext();
   return (
     <div>
-      <Form 
+      <Form
         ioAssignmentGrps={ioAssignmentGrps}
         aoAssignmentGrps={aoAssignmentGrps}
       />
@@ -13,4 +13,4 @@ const AppTwo = () => {
   );
 };
 
-export default Form_2;
+export default AppTwo;
