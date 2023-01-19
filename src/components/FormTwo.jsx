@@ -73,10 +73,10 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
 
     let resolvedTime = obj['Resolve time'];
 
-    d = Math.floor(resolvedTime / (3600*24))
-    h = Math.floor(resolvedTime % (3600*24) / 3600)
-    m = Math.floor(resolvedTime % 3600 / 60)
-    s = Math.floor(resolvedTime % 60)    
+    var d = Math.floor(resolvedTime / (3600*24));
+    var h = Math.floor(resolvedTime % (3600*24) / 3600);
+    var m = Math.floor(resolvedTime % 3600 / 60);
+    var s = Math.floor(resolvedTime % 60);    
 
     /*const actualElapsedInDays = Math.floor(
       (today.getTime() - Opened.getTime()) / (24 * 3600 * 1000)
