@@ -109,7 +109,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     resolvedWeekdate = resolvedWeekdate.toLocaleDateString('en-US');*/
     let Elapsed = '';
 
-    if (actualElapsedInDays < 7) {
+    /*if (actualElapsedInDays < 7) {
       Elapsed = '< 7 Days';
     } else if (actualElapsedInDays <= 14) {
       Elapsed = '1-2 weeks';
@@ -117,7 +117,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Elapsed = '2-4 weeks';
     } else {
       Elapsed = '> 1 month';
-    }
+    }*/
 
     const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
