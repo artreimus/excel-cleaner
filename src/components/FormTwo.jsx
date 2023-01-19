@@ -72,27 +72,25 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
 
     let resolvedTime = obj['Resolve time'];
 
-    var d = Math.floor(resolvedTime / (3600*24));
-    var h = Math.floor(resolvedTime % (3600*24) / 3600);
-    var m = Math.floor(resolvedTime % 3600 / 60);
-    var s = Math.floor(resolvedTime % 60);    
+    let d = Math.floor(resolvedTime / (3600*24));
+    let h = Math.floor(resolvedTime % (3600*24) / 3600);
+    let m = Math.floor(resolvedTime % 3600 / 60);
+    let s = Math.floor(resolvedTime % 60);    
 
     const TTR = (
       d + ":" + h + ":" + m + ":" + s 
     );
 
-    openedWeekdate = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1))
-    openedWeekdate = new Date(openedWeekdate)
+    let openedWeekdate = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1));
     
-    resolvedWeekdate = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
-    resolvedWeekdate = new Date(resolvedWeekdate)
-
+    let resolvedWeekdate = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1));
+    
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
     Updated = Updated.toLocaleDateString('en-US');
-   
-    let Elapsed = '';
-
+    resolvedWeekdate = resolvedWeekdate.toLocaleDateString('en-US');
+    openedWeekdate = openedWeekdate.toLocaleDateString('en-US');
+    
     const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
     return {
@@ -110,7 +108,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Location,
       Resolved,
       resolvedWeekdate,
-      resolvedTime,
+      'Resolved Time': obj['Resolve time'],
       TTR,
       Remarks,
     };
