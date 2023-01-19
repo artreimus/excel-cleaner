@@ -66,10 +66,23 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     } = obj;
 
     let today = new Date();
-    Opened = new Date(Opened);
     Updated = new Date(Updated);
+    Opened = new Date(Opened);
     Resolved = new Date(Resolved);
 
+    let openedWeekdate = new Date();
+    let openedDayNumber = Opened.getDay() || 7;
+
+    let resolvedWeekdate = new Date();
+    let resolvedDayNumber = Resolved.getDay() || 7;
+
+
+    if(openedDayNumber !== 1)              
+      openedWeekdate.setHours(-24 * (openedDayNumber - 1));
+
+    if(resolvedDayNumber !== 1)              
+      resolvedWeekdate.setHours(-24 * (resolvedDayNumber - 1));
+    
     let resolvedTime = obj['Resolve time'];
 
     let d = Math.floor(resolvedTime / (3600*24));
@@ -81,22 +94,29 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       d + ":" + h + ":" + m + ":" + s 
     );
 
-    let openedWeek = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1));
-    let resolvedWeek = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
+    //let openedWeek = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1));
+    //let resolvedWeek = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
+    
+    /*openedWeekdate.setDate(Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1)))
+    resolvedWeekdate.setDate(Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1)))*/
     
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
     Updated = Updated.toLocaleDateString('en-US');
-   
-    let openedWeekdate = new Date(openedWeekdate.setDate(openedWeek));
-    let resolvedWeekdate = new Date(resolvedWeekdate.setDate(resolvedWeekdate));
+    
+
+    /*let openedWeekdate = new Date(openedWeekdate)
+    let resolvedWeekdate = new Date(resolvedWeekdate)
+
+    openedWeekdate = openedWeekdate.setDate(openedWeek);
+    resolvedWeekdate = resolvedWeekdate.setDate(resolvedWeek);*/
 
     const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
     return {
       Number,
       Opened,
-      openedWeekdate,
+      'Week Opened': openedWeekdate, 
       Priority,
       State,
       'Short description': obj['Short description'],
@@ -107,8 +127,8 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Categorization,
       Location,
       Resolved,
-      resolvedWeekdate,
-      'Resolved Time': obj['Resolve time'],
+      'Week Resolved': resolvedWeekdate,
+      'Resolve Time': obj['Resolve time'],
       TTR,
       Remarks,
     };

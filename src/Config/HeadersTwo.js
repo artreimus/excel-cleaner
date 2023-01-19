@@ -1,7 +1,7 @@
 const HeadersTwo = [
   'Number',
   'Opened',
-  'Week Opened ',
+  'Week Opened',
   'Priority',
   'State',
   'Short description',
