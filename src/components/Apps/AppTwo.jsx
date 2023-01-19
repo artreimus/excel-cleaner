@@ -1,12 +1,12 @@
 import { useProvideContext } from '../../contexts/Context';
 import Control from '../Control/Control';
-import Form from '../FormTwo';
+import FormTwo from '../FormTwo';
 
 const AppTwo = () => {
   const { ioAssignmentGrps, aoAssignmentGrps } = useProvideContext();
   return (
     <div>
-      <Form
+      <FormTwo
         ioAssignmentGrps={ioAssignmentGrps}
         aoAssignmentGrps={aoAssignmentGrps}
       />
