@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { utils, writeFileXLSX, read } from 'xlsx';
 import Headers from '../Config/Headers';
 
-const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
+const Form_2 = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
   const [file, setFile] = useState();
   const [data, setData] = useState([]);
   const [IOData, setIOData] = useState([]);
@@ -61,6 +61,8 @@ const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Categorization,
       Remarks = '',
       Updated,
+      Location,
+
     } = obj;
 
     let today = new Date();
@@ -89,6 +91,14 @@ const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       d + ":" + h + ":" + m + ":" + s 
     );
 
+    const openedWeekdate = (
+      Opened.getDate() - Opened.getDay() + (Opened.getDay() == 0 ? -6:1)
+    );
+    
+    const resolvedWeekdate = (
+      Resolved.getDate() - Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1)
+    );
+
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
     Updated = Updated.toLocaleDateString('en-US');
@@ -108,26 +118,26 @@ const Form = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
     return {
-      'Short description': obj['Short description'],
-      'Task type': 'Incident',
-      'Assigned to': obj['Assigned to'],
+      //'Assigned to': obj['Assigned to'],
       Number,
       Opened,
-      Date: today,
-      'Actual elapsed': actualElapsedInDays,
-      Elapsed,
-      Group: assignmentGroup,
-      Tower: assignmentGroup,
+      openedWeekdate,
       Priority,
       State,
+      'Short description': obj['Short description'],
+      Group: assignmentGroup,
+      Tower: assignmentGroup,
       Channel,
+      'Task type': 'Incident',
       Categorization,
-      Updated,
-      'Resolve': Resolved,
-      'Resolve Time': resolvedTime,
+      Location,
+      //Updated,
+      Resolved,
+      resolvedWeekdate,
+      resolvedTime,
       tTR,
       Remarks,
-      'Untouched elapsed': untouchedElapsedInDays,
+      //'Untouched elapsed': untouchedElapsedInDays,
     };
   }
 
