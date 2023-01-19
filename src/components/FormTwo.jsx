@@ -62,8 +62,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Remarks = '',
       Updated,
       Location,
-      Resolved,
-
+      Resolved
     } = obj;
 
     let today = new Date();
@@ -78,51 +77,25 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     var m = Math.floor(resolvedTime % 3600 / 60);
     var s = Math.floor(resolvedTime % 60);    
 
-    /*const actualElapsedInDays = Math.floor(
-      (today.getTime() - Opened.getTime()) / (24 * 3600 * 1000)
-    );
-
-    const untouchedElapsedInDays = Math.floor(
-      (today.getTime() - Updated.getTime()) / (24 * 3600 * 1000)
-    );*/
-
-    /*const resolvedTime = (
-      (Opened.getTime() - Resolved.getTime()) / 1000
-    );*/
-
     const TTR = (
       d + ":" + h + ":" + m + ":" + s 
     );
 
-    const openedWeekdate = (
-      Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1))
-    );
+    openedWeekdate = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1))
+    openedWeekdate = new Date(openedWeekdate)
     
-    const resolvedWeekdate = (
-      Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
-    );
+    resolvedWeekdate = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
+    resolvedWeekdate = new Date(resolvedWeekdate)
 
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
     Updated = Updated.toLocaleDateString('en-US');
-    /*openedWeekdate = openedWeekdate.toLocaleDateString('en-US');
-    resolvedWeekdate = resolvedWeekdate.toLocaleDateString('en-US');*/
+   
     let Elapsed = '';
-
-    /*if (actualElapsedInDays < 7) {
-      Elapsed = '< 7 Days';
-    } else if (actualElapsedInDays <= 14) {
-      Elapsed = '1-2 weeks';
-    } else if (actualElapsedInDays <= 28) {
-      Elapsed = '2-4 weeks';
-    } else {
-      Elapsed = '> 1 month';
-    }*/
 
     const assignmentGroup = renameAssignmentGroup(obj['Assignment group']);
 
     return {
-      //'Assigned to': obj['Assigned to'],
       Number,
       Opened,
       openedWeekdate,
@@ -135,13 +108,11 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       'Task type': 'Incident',
       Categorization,
       Location,
-      //Updated,
       Resolved,
       resolvedWeekdate,
       resolvedTime,
       TTR,
       Remarks,
-      //'Untouched elapsed': untouchedElapsedInDays,
     };
   }
 
