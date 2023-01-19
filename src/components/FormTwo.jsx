@@ -62,6 +62,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       Remarks = '',
       Updated,
       Location,
+      Resolved,
 
     } = obj;
 
@@ -69,6 +70,8 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     Opened = new Date(Opened);
     Updated = new Date(Updated);
     Resolved = new Date(Resolved);
+
+    let resolvedTime = obj['Resolve time'];
 
     d = Math.floor(resolvedTime / (3600*24))
     h = Math.floor(resolvedTime % (3600*24) / 3600)
@@ -83,9 +86,9 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
       (today.getTime() - Updated.getTime()) / (24 * 3600 * 1000)
     );*/
 
-    const resolvedTime = (
+    /*const resolvedTime = (
       (Opened.getTime() - Resolved.getTime()) / 1000
-    );
+    );*/
 
     const TTR = (
       d + ":" + h + ":" + m + ":" + s 
