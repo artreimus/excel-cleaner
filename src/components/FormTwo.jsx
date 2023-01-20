@@ -70,7 +70,7 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     Opened = new Date(Opened);
     Resolved = new Date(Resolved);
 
-    let openedWeekdate = new Date("mm-dd-yyyy");
+    let openedWeekdate = new Date();
     let openedDayNumber = Opened.getDay();
 
     let resolvedWeekdate = new Date();
@@ -82,17 +82,17 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     else
       openedWeekdate.setDate(Opened)
 
-    /*if(resolvedDayNumber !== 1)              
-      resolvedWeekdate.setHours(-24 * (resolvedDayNumber - 1));
+    if(resolvedDayNumber !== 1)              
+      resolvedWeekdate.setDate(-24 * (resolvedDayNumber - 1));
     else
-      resolvedWeekdate.setDate(Resolved)*/
+      resolvedWeekdate.setDate(Resolved)
 
     let resolvedTime = obj['Resolve time'];
 
-    let d = Math.floor(resolvedTime / (3600*24));
-    let h = Math.floor(resolvedTime % (3600*24) / 3600);
-    let m = Math.floor(resolvedTime % 3600 / 60);
-    let s = Math.floor(resolvedTime % 60);    
+    let d = ("0" + Math.floor(resolvedTime / (3600*24))).slice(-2)
+    let h = ("0" + Math.floor(resolvedTime % (3600*24) / 3600)).slice(-2);
+    let m = ("0" + Math.floor(resolvedTime % 3600 / 60)).slice(-2);
+    let s = ("0" + Math.floor(resolvedTime % 60)).slice(-2);    
 
     const TTR = (
       d + ":" + h + ":" + m + ":" + s 
@@ -101,9 +101,9 @@ const FormTwo = ({ ioAssignmentGrps, aoAssignmentGrps }) => {
     //let openedWeek = Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1));
     //let resolvedWeek = Resolved.getDate() - (Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1))
     
-    //openedWeekdate.setDate(Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1)))
+    /*openedWeekdate.setDate(Opened.getDate() - (Opened.getDay() + (Opened.getDay() == 0 ? -6:1)))
     let resolvedWeekDay = Resolved.getDate() - Resolved.getDay() + (Resolved.getDay() == 0 ? -6:1)
-    resolvedWeekdate.setDate(resolvedWeekDay);
+    resolvedWeekdate.setDate(resolvedWeekDay);*/
 
     today = today.toLocaleDateString('en-US');
     Opened = Opened.toLocaleDateString('en-US');
